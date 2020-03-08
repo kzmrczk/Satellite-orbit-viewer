@@ -11,6 +11,7 @@ import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
 import javax.swing.*;
 
+
 /**
  * This example demonstrates the simplest possible way to create a WorldWind application.
  *
@@ -28,10 +29,13 @@ public class SimplestPossibleExample extends JFrame
 
     public static void main(String[] args)
     {
+    	gov.nasa.worldwind.WorldWind.getNetworkStatus().setOfflineMode(true);
         java.awt.EventQueue.invokeLater(new Runnable()
         {
             public void run()
             {
+            	//FileCache dataFileCache = WorldWind.getDataFileCache();
+                //dataFileCache.addCacheLocation(IMAGERY_PATH);
                 JFrame frame = new SimplestPossibleExample();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
