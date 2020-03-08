@@ -77,7 +77,7 @@ public class Propagation2LatLonAlt {
     manager.addProvider(new DirectoryCrawler(orekitData));
     
     double duration = 600.;
-    AbsoluteDate finalDate = initialDate.shiftedBy(duration);
+    AbsoluteDate finalDate = initialDate.shiftedBy(duration); //time shift in seconds
     double stepT = 60.;
     int cpt = 1;
     for (AbsoluteDate extrapDate = initialDate;
