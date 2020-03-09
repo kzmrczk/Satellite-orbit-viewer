@@ -17,7 +17,6 @@ import gov.nasa.worldwindx.examples.Paths.AppFrame;
 import java.util.*;
 
 import java.io.File;
-import java.util.Locale;
 
 import org.hipparchus.geometry.euclidean.threed.Vector3D;
 import org.hipparchus.util.FastMath;
@@ -67,7 +66,7 @@ public class Propagation2LatLonAlt {
     
     kepler.setSlaveMode();
     
-    File orekitData = new File("C:/Users/hamis/eclipse-workspace/orekit-data");
+    File orekitData = new File("C:\\Users\\Dawid Kazimierczak\\Documents\\ISAE\\Space Project Tools for Simulation");
     if (!orekitData.exists()) {
         System.err.format(Locale.US, "You need to download the zip and rename it 'orekit-data', then specify the location in Propagation2LatLonAlt.java",
                           "orekit-data-master.zip", "https://gitlab.orekit.org/orekit/orekit-data/-/archive/master/orekit-data-master.zip");
@@ -80,6 +79,13 @@ public class Propagation2LatLonAlt {
     AbsoluteDate finalDate = initialDate.shiftedBy(duration); //time shift in seconds
     double stepT = 60.;
     int cpt = 1;
+    
+    RenderableLayer layer = new RenderableLayer();
+    ArrayList<Position> pathPositions = new ArrayList<Position>();
+    ShapeAttributes attrs = new BasicShapeAttributes();
+    attrs.setOutlineMaterial(new Material(WWUtil.makeRandomColor(null)));
+    attrs.setOutlineWidth(2d);
+    
     for (AbsoluteDate extrapDate = initialDate;
          extrapDate.compareTo(finalDate) <= 0;
          extrapDate = extrapDate.shiftedBy(stepT))  {
@@ -96,6 +102,7 @@ public class Propagation2LatLonAlt {
         //Vector3D      v       = t.transformVector(pvInert.getVelocity()); not used currently but maybe useful for further applications
         GeodeticPoint pos  = earth.transform(p, earth.getBodyFrame(), date);
         
+        //Printing each step
         System.out.println("step " + cpt++);
         System.out.println(" time : " + currentState.getDate().toString(utc));
         System.out.println(" " + currentState.getOrbit());
@@ -103,78 +110,26 @@ public class Propagation2LatLonAlt {
         System.out.println(" LON " + pos.getLongitude());
         System.out.println(" ALT " + pos.getAltitude());
         
+        //Plotting the path
+        pathPositions.add(Position.fromDegrees(pos.getLatitude(),pos.getLongitude(),pos.getAltitude()));
         
-//        public class Paths extends ApplicationTemplate
-//        {
-//            public static class AppFrame extends ApplicationTemplate.AppFrame
-//            {
-//                public AppFrame()
-//                {
-//                    super(true, true, false);
-
-                    // Add a dragging tool to enable shape dragging
-                    AppFrame AF = new AppFrame();
-                    AF.getWwd().addSelectListener(new BasicDragger(AF.getWwd()));
-
-                    RenderableLayer layer = new RenderableLayer();
-
-                    // Create and set an attribute bundle.
-                    ShapeAttributes attrs = new BasicShapeAttributes();
-                    attrs.setOutlineMaterial(new Material(WWUtil.makeRandomColor(null)));
-                    attrs.setOutlineWidth(2d);
-
-                    // Create a path, set some of its properties and set its attributes.
-                    ArrayList<Position> pathPositions = new ArrayList<Position>();
-                    pathPositions.add(Position.fromDegrees(28, -102, 1e4));
-                    pathPositions.add(Position.fromDegrees(35, -100, 1e4));
-                    Path path = new Path(pathPositions);
-                    path.setAttributes(attrs);
-                    path.setVisible(true);
-                    path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-                    path.setPathType(AVKey.GREAT_CIRCLE);
-                    layer.addRenderable(path);
-
-                    // Create a path that uses all default values.
-                    pathPositions = new ArrayList<Position>();
-                    pathPositions.add(Position.fromDegrees(28, -104, 1e4));
-                    pathPositions.add(Position.fromDegrees(35, -102, 1e4));
-                    path = new Path(pathPositions);
-                    layer.addRenderable(path);
-
-                    // Create a path with more than two positions and closed.
-                    pathPositions = new ArrayList<Position>();
-                    pathPositions.add(Position.fromDegrees(28, -106, 4e4));
-                    pathPositions.add(Position.fromDegrees(35, -104, 4e4));
-                    pathPositions.add(Position.fromDegrees(35, -107, 4e4));
-                    pathPositions.add(Position.fromDegrees(28, -107, 4e4));
-                    path = new Path(pathPositions);
-                    path.setAltitudeMode(WorldWind.ABSOLUTE);
-                    path.setExtrude(true);
-                    path.setPathType(AVKey.LINEAR);
-
-                    attrs = new BasicShapeAttributes();
-                    attrs.setOutlineMaterial(new Material(WWUtil.makeRandomColor(null)));
-                    attrs.setInteriorMaterial(new Material(WWUtil.makeRandomColor(null)));
-                    attrs.setOutlineWidth(2);
-                    path.setAttributes(attrs);
-
-                    layer.addRenderable(path);
-
-                    // Add the layer to the model.
-                    ApplicationTemplate.insertBeforeCompass(AF.getWwd(), layer);
-
-                    List<Marker> markers = new ArrayList<Marker>(1);
-                    markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
-                    MarkerLayer markerLayer = new MarkerLayer();
-                    markerLayer.setMarkers(markers);
-                    ApplicationTemplate.insertBeforeCompass(AF.getWwd(), markerLayer);
-             
-
-                ApplicationTemplate.start("World Wind Paths", AppFrame.class);
-
         }
 
-        
+    Path path = new Path(pathPositions);
+    path.setAttributes(attrs);
+    path.setVisible(true);
+    path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+    path.setPathType(AVKey.GREAT_CIRCLE);
+    layer.addRenderable(path);
+    
+    insertBeforeCompass(getWwd(), layer);
+    List<Marker> markers = new ArrayList<Marker>(1);
+    markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
+    MarkerLayer markerLayer = new MarkerLayer();
+    markerLayer.setMarkers(markers);
+    insertBeforeCompass(getWwd(), markerLayer);
+    
     }
+
   }
 
