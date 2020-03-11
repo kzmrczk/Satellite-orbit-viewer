@@ -87,8 +87,8 @@ public class Propagation2LatLonAlt {
     attrs.setOutlineWidth(2d);
     
     for (AbsoluteDate extrapDate = initialDate;
-         extrapDate.compareTo(finalDate) <= 0;
-         extrapDate = extrapDate.shiftedBy(stepT))  {
+        extrapDate.compareTo(finalDate) <= 0;
+        extrapDate = extrapDate.shiftedBy(stepT))  {
         SpacecraftState currentState = kepler.propagate(extrapDate);
         
         OneAxisEllipsoid earth = new OneAxisEllipsoid(Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
@@ -114,21 +114,33 @@ public class Propagation2LatLonAlt {
         pathPositions.add(Position.fromDegrees(pos.getLatitude(),pos.getLongitude(),pos.getAltitude()));
         
         }
+    
+    public static class AppFrame extends ApplicationTemplate.AppFrame
+    {
+        public AppFrame()
+        {
+            super(true, true, false);
 
-    Path path = new Path(pathPositions);
-    path.setAttributes(attrs);
-    path.setVisible(true);
-    path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-    path.setPathType(AVKey.GREAT_CIRCLE);
-    layer.addRenderable(path);
+            // Add a dragger to enable shape dragging
+            this.getWwd().addSelectListener(new BasicDragger(this.getWwd()));
+
+            RenderableLayer layer = new RenderableLayer();
+            Path path = new Path(pathPositions);
+            path.setAttributes(attrs);
+            path.setVisible(true);
+            path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
+            path.setPathType(AVKey.GREAT_CIRCLE);
+            layer.addRenderable(path);
     
-    insertBeforeCompass(getWwd(), layer);
-    List<Marker> markers = new ArrayList<Marker>(1);
-    markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
-    MarkerLayer markerLayer = new MarkerLayer();
-    markerLayer.setMarkers(markers);
-    insertBeforeCompass(getWwd(), markerLayer);
-    
+            insertBeforeCompass(getWwd(), layer);
+            List<Marker> markers = new ArrayList<Marker>(1);
+            markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
+            MarkerLayer markerLayer = new MarkerLayer();
+            markerLayer.setMarkers(markers);
+            insertBeforeCompass(getWwd(), markerLayer);
+        }
+    }
+    ApplicationTemplate.start("World Wind Paths", AppFrame.class);
     }
 
   }
