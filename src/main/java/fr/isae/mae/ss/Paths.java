@@ -91,9 +91,9 @@ public class Paths extends ApplicationTemplate
             insertBeforeCompass(getWwd(), markerLayer);
         }
     }
-
     public static void main(String[] args)
     {
+    	double x=1;
         ApplicationTemplate.start("World Wind Paths", AppFrame.class);
     }
 }
