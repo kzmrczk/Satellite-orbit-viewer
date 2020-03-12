@@ -52,7 +52,7 @@ public class OrbitGenerator {
 	    
 	    File orekitData = new File("C:\\Users\\Dawid Kazimierczak\\Documents\\ISAE\\Space Project Tools for Simulation");
 	    if (!orekitData.exists()) {
-	        System.err.format(Locale.US, "You need to download the zip and rename it 'orekit-data', then specify the location in Propagation2LatLonAlt.java",
+	        System.err.format(Locale.US, "You need to specify the location and name of the orekit-data-master file in OrbitGenerator.java",
 	                          "orekit-data-master.zip", "https://gitlab.orekit.org/orekit/orekit-data/-/archive/master/orekit-data-master.zip");
 	        System.exit(1);
 	    }
