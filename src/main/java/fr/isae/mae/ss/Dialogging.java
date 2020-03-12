@@ -40,51 +40,65 @@ public class Dialogging {
 		return a;
 	}
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
+	public static double[] main() {
+		double[] out = new double[6];
+		double a=0;
+		double e=0;
+		double i=0;
+		double omega=0;
+		double raan=0;
+		double lM=0;
+		
 		Object[] options = { "LEO", "SSO", "GEO", "Custom" };
 		int n = JOptionPane.showOptionDialog(null, "Which type of orbit you would like to visualise?", "Inputs",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
 		if (n == 0) {
 			// LEO chosen
-			double a = 6378000+800000; // semi major axis in meters
-			double e = 0.72831215; // eccentricity
-			double i = FastMath.toRadians(7); // inclination
-			double omega = FastMath.toRadians(180); // perigee argument
-			double raan = FastMath.toRadians(261); // right ascension of ascending node
-			double lM = 0; // mean anomaly
+			a = 6378000+800000; // semi-major axis in meters
+			e = 0.72831215; // eccentricity
+			i = FastMath.toRadians(7); // inclination
+			omega = FastMath.toRadians(180); // perigee argument
+			raan = FastMath.toRadians(261); // right ascension of ascending node
+			lM = 0; // mean anomaly
 
 		} else if (n == 1) {
 			// SSO chosen
-			double a = 6378000+800000; // semi major axis in meters
-			double e = 0.72831215; // eccentricity
-			double i = FastMath.toRadians(89); // inclination
-			double omega = FastMath.toRadians(180); // perigee argument
-			double raan = FastMath.toRadians(261); // right ascension of ascending node
-			double lM = 0; // mean anomaly
+			a = 6378000+800000; // semi major axis in meters
+			e = 0.72831215; // eccentricity
+			i = FastMath.toRadians(89); // inclination
+			omega = FastMath.toRadians(180); // perigee argument
+			raan = FastMath.toRadians(261); // right ascension of ascending node
+			lM = 0; // mean anomaly
 
 		} else if (n == 2) {
 			// GEO chosen
-			double a = 6378000+32000000; // semi major axis in meters
-			double e = 0.72831215; // eccentricity
-			double i = FastMath.toRadians(7); // inclination
-			double omega = FastMath.toRadians(180); // perigee argument
-			double raan = FastMath.toRadians(261); // right ascension of ascending node
-			double lM = 0; // mean anomaly
+			a = 6378000+32000000; // semi major axis in meters
+			e = 0.72831215; // eccentricity
+			i = FastMath.toRadians(7); // inclination
+			omega = FastMath.toRadians(180); // perigee argument
+			raan = FastMath.toRadians(261); // right ascension of ascending node
+			lM = 0; // mean anomaly
 
 		} else if (n == 3) {
 			// Custom chosen
-			double a = Dialogging.getNumInput("Semi-major axis (km):")*1000; //semi-major axis (m)
-			double e = Dialogging.getNumInput("Eccentricity:"); //eccentricity
-			double i = FastMath.toRadians(Dialogging.getNumInput("Inclination (degrees):")); // inclination
-			double omega = FastMath.toRadians(Dialogging.getNumInput("Argument of perigee (degrees):")); // perigee argument
-			double raan = FastMath.toRadians(Dialogging.getNumInput("Right Ascension of Ascending Node (degrees):")); // right ascension of ascending node
-			double lM = FastMath.toRadians(Dialogging.getNumInput("Mean anomaly (degrees):")); // mean anomaly
-			
-			
-			
-
+			a = Dialogging.getNumInput("Semi-major axis (km):")*1000; //semi-major axis (m)
+			e = Dialogging.getNumInput("Eccentricity:"); //eccentricity
+			i = FastMath.toRadians(Dialogging.getNumInput("Inclination (degrees):")); // inclination
+			omega = FastMath.toRadians(Dialogging.getNumInput("Argument of perigee (degrees):")); // perigee argument
+			raan = FastMath.toRadians(Dialogging.getNumInput("Right Ascension of Ascending Node (degrees):")); // right ascension of ascending node
+			lM = FastMath.toRadians(Dialogging.getNumInput("Mean anomaly (degrees):")); // mean anomaly
 		}
+		
+		out[0] = a;
+		out[1] = e;
+		out[2] = i;
+		out[3] = omega;
+		out[4] = raan;
+		out[5] = lM;
+		
+		return out;
 	}
 
 }
