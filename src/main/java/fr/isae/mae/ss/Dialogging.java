@@ -7,7 +7,7 @@ import org.hipparchus.util.FastMath;
 public class Dialogging {
 	
 	public static double getNumInput(String param) {
-		String s = (String) JOptionPane.showInputDialog(null, param + "\n", "Customized Dialog",
+		String s = (String) JOptionPane.showInputDialog(null, param + "\n", "Orbital parameters",
 			JOptionPane.PLAIN_MESSAGE, null, null, "");
 		double a = -1;
 
@@ -17,7 +17,7 @@ public class Dialogging {
 		catch (NumberFormatException e) {
 			while (a < 0) {
 				String s2 = (String) JOptionPane.showInputDialog(null,
-					"Please enter a number! " + param +"\n", "Customized Dialog",
+					"Please enter a number! " + param +"\n", "Orbital parameters",
 					JOptionPane.PLAIN_MESSAGE, null, null, "");
 //			try {
 				a = Integer.parseInt(s2);
