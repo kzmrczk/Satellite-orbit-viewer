@@ -59,9 +59,9 @@ public class OrbitGenerator {
 	    DataProvidersManager manager = DataProvidersManager.getInstance();
 	    manager.addProvider(new DirectoryCrawler(orekitData));
 	    
-	    double duration = 86400.;
+	    double duration = 2*FastMath.PI*FastMath.sqrt(FastMath.pow(a,3)/mu);
 	    AbsoluteDate finalDate = initialDate.shiftedBy(duration); //time shift in seconds
-	    double stepT = 100.;
+	    double stepT = duration/100;
 	    
 
 	    ArrayList<Position> pathPositions = new ArrayList<Position>();
