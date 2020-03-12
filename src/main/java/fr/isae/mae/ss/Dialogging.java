@@ -74,7 +74,7 @@ public class Dialogging {
 
 		} else if (n == 2) {
 			// GEO chosen
-			a = 6378000+32000000; // semi major axis in meters
+			a = 42241080; // semi major axis in meters
 			e = 0.72831215; // eccentricity
 			i = FastMath.toRadians(7); // inclination
 			omega = FastMath.toRadians(180); // perigee argument
