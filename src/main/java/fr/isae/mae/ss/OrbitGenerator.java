@@ -82,6 +82,7 @@ public class OrbitGenerator {
 	    
 	    // Loading Orekit data needed to compute the orbit. AbsoluteFilePath looks for the zip file in the system
 	    File orekitData = new File(AbsoluteFilePath.getPath("orekit-data-master.zip"));
+	    //File orekitData = new File("C:/Users/username/Documents/orekit-data-master");
 	    if (!orekitData.exists()) {
 	        System.err.format(Locale.US, "You need to specify the location and name of the orekit-data-master file in OrbitGenerator.java",
 	                          "orekit-data-master.zip", "https://gitlab.orekit.org/orekit/orekit-data/-/archive/master/orekit-data-master.zip");
