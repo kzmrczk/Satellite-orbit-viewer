@@ -18,8 +18,10 @@ public class AbsoluteFilePath
     {	
     	// Creating a File object with a specific name
     	File orekit = new File(args);
+    	
 		// Getting the absolute path to that file
 		String absolutePath = orekit.getAbsolutePath();
+		
 		// Cutting the part after the last separator from the path
 		String filePath = absolutePath.
 			     substring(0,absolutePath.lastIndexOf(File.separator));
