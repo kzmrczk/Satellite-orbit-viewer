@@ -24,7 +24,7 @@ import gov.nasa.worldwindx.examples.ApplicationTemplate;
  *
  */
 
-public class SatelliteOrbitViewer extends ApplicationTemplate {
+public class OrbitViewer1000 extends ApplicationTemplate {
 	
 	// Initializing the array holding positions of the path
 	static ArrayList<Position> pathPositions = new ArrayList<Position>();
