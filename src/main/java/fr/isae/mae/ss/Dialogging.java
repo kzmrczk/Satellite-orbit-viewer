@@ -4,6 +4,11 @@ import javax.swing.JOptionPane;
 
 import org.hipparchus.util.FastMath;
 
+/**
+ * 
+ * @author Hamish McPhee
+ *
+ */
 public class Dialogging {
 	
 	public static double getNumInput(String param) {
@@ -16,17 +21,13 @@ public class Dialogging {
 		} 
 		catch (NumberFormatException e) {
 			while (a < 0) {
+				// Comment
 				String s2 = (String) JOptionPane.showInputDialog(null,
 					"Please enter a number! " + param +"\n", "Orbital parameters",
 					JOptionPane.PLAIN_MESSAGE, null, null, "");
-//			try {
+				// Comment
 				a = Integer.parseInt(s2);
-//			} catch (NumberFormatException e2) {
-////				System.out.println("Run the program again when you decide to enter the requested format");
-//				break;
-//			}
 			}
-
 		}
 
 		switch (param) {
@@ -40,7 +41,6 @@ public class Dialogging {
 		return a;
 	}
 
-	//public static void main(String[] args) {
 	public static double[] main() {
 		double[] out = new double[6];
 		double a=0;
