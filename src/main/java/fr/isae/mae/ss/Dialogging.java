@@ -21,11 +21,9 @@ public class Dialogging {
 		} 
 		catch (NumberFormatException e) {
 			while (a < 0) {
-				// Comment
 				String s2 = (String) JOptionPane.showInputDialog(null,
 					"Please enter a number! " + param +"\n", "Orbital parameters",
 					JOptionPane.PLAIN_MESSAGE, null, null, "");
-				// Comment
 				a = Integer.parseInt(s2);
 			}
 		}
