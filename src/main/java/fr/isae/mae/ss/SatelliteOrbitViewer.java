@@ -1,6 +1,7 @@
 package fr.isae.mae.ss;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import gov.nasa.worldwind.WorldWind;
@@ -14,14 +15,24 @@ import gov.nasa.worldwind.render.ShapeAttributes;
 import gov.nasa.worldwind.util.BasicDragger;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 
-public class viewer extends ApplicationTemplate {
+/**
+ * 
+ * @author Dawid Kazimierczak
+ * 
+ * SatelliteOrbitViewer is a class that extends ApplicationTemplate and it is the main
+ * class of the software SatelliteOrbitViewer1000. It uses other classes.
+ *
+ */
 
+public class SatelliteOrbitViewer extends ApplicationTemplate {
+	
+	// Initializing the array holding positions of the path
 	static ArrayList<Position> pathPositions = new ArrayList<Position>();
 	
 	@SuppressWarnings("serial")
 	public static class DisplayPaths extends ApplicationTemplate.AppFrame
     {
-        public DisplayPaths()
+        public DisplayPaths() throws FileNotFoundException
         {
         	// Specify whether to include: (Status bar, Layer panel, Statistics panel)
             super(true, true, false);
