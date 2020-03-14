@@ -104,9 +104,13 @@ public class OrbitGenerator {
     	FileOutputStream dataFile = new FileOutputStream("dataFile.txt");
     	// Creating a PrintWriter to print into file
 		PrintWriter save = new PrintWriter(dataFile);
-    	// Printing the first line
-    	save.println("Time Latitude Longitude Altitude");
-
+    	// Printing the first lines
+		save.println("Initial orbital parameters:");
+		save.format("%10s %10s %10s %10s %10s %10s\n","Semi-major axis[km]","Eccentricity","Inclination[deg]","Perigee argument[deg]","Right ascension of ascending node[deg]","Mean anomaly[deg]");
+		save.format("%10.4f %10.4f %10.4f %10.4f %10.4f %10.4f\n",a/1000,e,Math.toDegrees(i),Math.toDegrees(omega),Math.toDegrees(raan),Math.toDegrees(lM));
+		save.println("-----------------------------------------------------------------------------");
+    	save.format("%10s %10s %10s %10s\n","Time","Latitude[deg]","Longitude[deg]","Altitude[km]");
+    	
     	// Loop: propagation of the orbit
 	    for (AbsoluteDate extrapDate = initialDate;
 	        extrapDate.compareTo(finalDate) <= 0;
@@ -128,8 +132,8 @@ public class OrbitGenerator {
 	        // Adding position to the array
 	        pathPositions.add(Position.fromRadians(pos.getLatitude(),pos.getLongitude(),pos.getAltitude()));
 	        // Adding state data to the array
-	        save.println(currentState.getDate().toString(utc) + " " + (pos.getLatitude()*180/3.14) + " " +
-	        		(pos.getLongitude()*180/3.14) + " " + pos.getAltitude() + "\n");
+	        save.format("%10s %10.4f %10.4f %10.4f\n",currentState.getDate().toString(utc),(pos.getLatitude()*180/3.14),
+	        		(pos.getLongitude()*180/3.14),pos.getAltitude()/1000);
 	    }
 	    
 	    // Closing the file
